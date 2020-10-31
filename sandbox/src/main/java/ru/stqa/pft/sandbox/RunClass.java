@@ -8,5 +8,4 @@ public class RunClass {
     System.out.println(p1.distance(p2));
     System.out.println(p2.distance(p1));
   }
-
 }
