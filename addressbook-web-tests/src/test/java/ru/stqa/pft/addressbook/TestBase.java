@@ -123,4 +123,25 @@ public class TestBase {
   protected void gotoContactPage() {
     wd.findElement(By.linkText("add new")).click();
   }
+
+  protected void deleteSelectedGroups() {
+    wd.findElement(By.xpath("(//input[@name='delete'])[2]")).click();
+  }
+
+  protected void selectGroup() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  protected void deleteSelectedContacts() {
+    wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    wd.switchTo().alert().accept();
+  }
+
+  protected void selectContact() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  protected void gotoContactHome() {
+    wd.findElement(By.linkText("home")).click();
+  }
 }
