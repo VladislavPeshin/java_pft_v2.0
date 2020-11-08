@@ -33,11 +33,11 @@ public class GroupHelper extends HelperBase{
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
   }
 
-  private void initGroupCreation(String s) {
+  public void initGroupCreation(String s) {
     click(By.name(s));
   }
 
-  private boolean isElementPresent(By by) {
+  public boolean isElementPresent(By by) {
     try {
       wd.findElement(by);
       return true;
@@ -46,7 +46,7 @@ public class GroupHelper extends HelperBase{
     }
   }
 
-  private boolean isAlertPresent() {
+  public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
