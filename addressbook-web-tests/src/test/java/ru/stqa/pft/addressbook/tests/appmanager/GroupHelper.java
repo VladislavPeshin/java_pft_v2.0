@@ -118,6 +118,6 @@ public class GroupHelper extends HelperBase{
   }
 
   public void submitContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+    click(By.xpath("//input[@name='update']"));
   }
 }
