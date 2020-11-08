@@ -27,11 +27,15 @@ public class ContactCreationTests {
 
   @Test
   public void testContactCreation() throws Exception {
-    gotoGroupPage();
+    gotoContactPage();
     initContactCreation();
     fillContactForm(new ContactData("ivan", "ivanov", "ivanovich", "ivan666", "test", "test", "test"));
     submitContactCreation();
     returnToHome();
+    returnToLogin();
+  }
+
+  private void returnToLogin() {
     wd.findElement(By.linkText("Logout")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
@@ -68,7 +72,7 @@ public class ContactCreationTests {
     wd.findElement(By.name("firstname")).clear();
   }
 
-  private void gotoGroupPage() {
+  private void gotoContactPage() {
     wd.findElement(By.linkText("add new")).click();
   }
 

@@ -30,6 +30,10 @@ public class GroupCreationTests {
     gotoGroupPage("groups");
     fillGroupForm(new GroupData("test1", "test2", "test3"));
     submitGroupCreation("submit");
+    returnToGroupPage();
+  }
+
+  private void returnToGroupPage() {
     wd.findElement(By.linkText("groups")).click();
     wd.findElement(By.linkText("Logout")).click();
     wd.findElement(By.name("user")).clear();
