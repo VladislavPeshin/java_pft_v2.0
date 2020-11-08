@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.tests.appmanager;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
