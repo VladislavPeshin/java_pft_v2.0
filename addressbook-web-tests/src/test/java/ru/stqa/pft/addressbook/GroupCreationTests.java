@@ -11,4 +11,5 @@ public class GroupCreationTests extends TestBase{
     submitGroupCreation("submit");
     returnToGroupPage();
   }
+
 }
