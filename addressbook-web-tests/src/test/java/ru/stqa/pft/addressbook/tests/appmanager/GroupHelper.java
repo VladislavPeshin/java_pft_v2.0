@@ -25,7 +25,7 @@ public class GroupHelper extends HelperBase{
   }
 
   public void fillGroupForm(GroupData groupData) {
-    initGroupCreation("new");
+    //initGroupCreation("new");
     type(By.name("group_name"), groupData.getName());
     wd.findElement(By.name("group_header")).clear();
     wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
