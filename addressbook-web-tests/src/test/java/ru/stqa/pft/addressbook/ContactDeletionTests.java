@@ -15,7 +15,7 @@ public class ContactDeletionTests {
   }
 
   @Test
-  public void testContactDeletionTests() throws Exception {
+  public void testContactDeletion() throws Exception {
     wd.get("http://localhost/addressbook/group.php");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
