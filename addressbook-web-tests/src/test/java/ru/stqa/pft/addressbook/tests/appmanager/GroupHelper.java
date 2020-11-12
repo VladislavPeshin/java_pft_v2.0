@@ -25,7 +25,7 @@ public class GroupHelper extends HelperBase{
   }
 
   public void fillGroupForm(GroupData groupData) {
-    //initGroupCreation("new");
+    initGroupCreation();
     type(By.name("group_name"), groupData.getName());
     wd.findElement(By.name("group_header")).clear();
     wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
@@ -33,59 +33,8 @@ public class GroupHelper extends HelperBase{
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
   }
 
-  public void initGroupCreation(String s) {
-    click(By.name(s));
-  }
-
-  public boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  public boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  public void returnToLogin() {
-    click(By.linkText("Logout"));
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
-  }
-
-  public void returnToHome() {
-    click(By.linkText("home"));
-  }
-
-  public void submitContactCreation() {
-    click(By.name("submit"));
-  }
-
-  public void fillContactForm(ContactData contactData) {
-    wd.findElement(By.name("firstname")).sendKeys(contactData.getName());
-    wd.findElement(By.name("middlename")).clear();
-    wd.findElement(By.name("middlename")).sendKeys(contactData.getMeddleName());
-    wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-    wd.findElement(By.name("nickname")).clear();
-    wd.findElement(By.name("nickname")).sendKeys(contactData.getNickname());
-    wd.findElement(By.name("title")).clear();
-    wd.findElement(By.name("title")).sendKeys(contactData.getTitle());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("company"), contactData.getCompany());
-  }
-
-  public void initContactCreation() {
-    click(By.name("firstname"));
-    wd.findElement(By.name("firstname")).clear();
+  public void initGroupCreation() {
+    click(By.name("new"));
   }
 
   public void deleteSelectedGroups() {
@@ -96,28 +45,11 @@ public class GroupHelper extends HelperBase{
     click(By.name("selected[]"));
   }
 
-  public void deleteSelectedContacts() {
-    click(By.xpath("//input[@value='Delete']"));
-    wd.switchTo().alert().accept();
-  }
-
-  public void selectContact() {
-    click(By.name("selected[]"));
-  }
-
   public void initGroupModification() {
     click(By.name("edit"));
   }
 
   public void submitGroupModification() {
     click(By.name("update"));
-  }
-
-  public void initContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
-  }
-
-  public void submitContactModification() {
-    click(By.xpath("//input[@name='update']"));
   }
 }
