@@ -23,6 +23,16 @@ public class ApplicationManager {
     sessionHelp.login("admin", "secret");
   }
 
+  public void initContact() {
+    wd = new FirefoxDriver();
+    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/group.php#");
+    contactHelper = new ContactHelper ((FirefoxDriver) wd);
+    navigationHelper = new NavigationHelper(wd);
+    sessionHelp = new SessionHelper(wd);
+    sessionHelp.login("admin", "secret");
+  }
+
 
   public void stop() {
     wd.quit();
