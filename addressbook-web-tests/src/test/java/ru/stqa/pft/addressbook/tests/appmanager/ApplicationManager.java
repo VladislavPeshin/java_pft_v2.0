@@ -1,39 +1,44 @@
 package ru.stqa.pft.addressbook.tests.appmanager;
 
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  FirefoxDriver wd;
+  WebDriver wd;
 
   private SessionHelper sessionHelp;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private ContactHelper contactHelper;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+    this.browser = browser;
+  }
 
   public void init() {
-    wd = new FirefoxDriver();
+    if (browser == BrowserType.FIREFOX){
+      wd = new FirefoxDriver();
+    }else if (browser == BrowserType.CHROME){
+      wd = new ChromeDriver();
+    }else if (browser == BrowserType.IE){
+      wd = new InternetExplorerDriver();
+    }
+    //wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php#");
-    groupHelper = new GroupHelper ((FirefoxDriver) wd);
-    contactHelper = new ContactHelper ((FirefoxDriver) wd);
+    groupHelper = new GroupHelper ((WebDriver) wd);
+    contactHelper = new ContactHelper ((WebDriver) wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelp = new SessionHelper(wd);
     sessionHelp.login("admin", "secret");
   }
-/*
-  public void initContact() {
-    wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/group.php#");
-    contactHelper = new ContactHelper ((FirefoxDriver) wd);
-    navigationHelper = new NavigationHelper(wd);
-    sessionHelp = new SessionHelper(wd);
-    sessionHelp.login("admin", "secret");
-  }
-*/
 
   public void stop() {
     wd.quit();
