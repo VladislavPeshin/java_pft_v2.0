@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests.model;
 
 public class ContactData {
+  public final String id;
   public final String name;
   public final String meddleName;
   public final String lastName;
@@ -11,6 +12,7 @@ public class ContactData {
   public final String group;
 
   public ContactData(String ivan, String name, String meddleName, String lastName, String nickname, String title, String address, String company, String group) {
+    this.id = null;
     this.name = name;
     this.meddleName = meddleName;
     this.lastName = lastName;
@@ -21,15 +23,24 @@ public class ContactData {
     this.group = group;
   }
 
-  public String getName() {
-    return name;
+  public ContactData(String id, String ivan, String name, String meddleName, String lastName, String nickname, String title, String address, String company, String group) {
+    this.id = id;
+    this.name = name;
+    this.meddleName = meddleName;
+    this.lastName = lastName;
+    this.nickname = nickname;
+    this.title = title;
+    this.address = address;
+    this.company = company;
+    this.group = group;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "name='" + name + '\'' +
-            '}';
+  public String getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
   }
 
   @Override
@@ -39,6 +50,7 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
     if (name != null ? !name.equals(that.name) : that.name != null) return false;
     if (meddleName != null ? !meddleName.equals(that.meddleName) : that.meddleName != null) return false;
     if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
@@ -51,7 +63,8 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    int result = name != null ? name.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
     result = 31 * result + (meddleName != null ? meddleName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
@@ -60,6 +73,14 @@ public class ContactData {
     result = 31 * result + (company != null ? company.hashCode() : 0);
     result = 31 * result + (group != null ? group.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            '}';
   }
 
   public String getMeddleName() {
