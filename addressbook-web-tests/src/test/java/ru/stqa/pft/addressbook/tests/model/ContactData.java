@@ -25,6 +25,43 @@ public class ContactData {
     return name;
   }
 
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "name='" + name + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (name != null ? !name.equals(that.name) : that.name != null) return false;
+    if (meddleName != null ? !meddleName.equals(that.meddleName) : that.meddleName != null) return false;
+    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
+    if (title != null ? !title.equals(that.title) : that.title != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (company != null ? !company.equals(that.company) : that.company != null) return false;
+    return group != null ? group.equals(that.group) : that.group == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (meddleName != null ? meddleName.hashCode() : 0);
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+    result = 31 * result + (title != null ? title.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (company != null ? company.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    return result;
+  }
+
   public String getMeddleName() {
     return meddleName;
   }
