@@ -15,7 +15,6 @@ public class ContactModificationTests extends TestBase{
     app.goTo().gotoContactPage();
     app.goTo().gotoContactHome();
     if (app.contact().list().size() == 0){
-      //app.contact().create(new ContactData("ivan", "ivan", "ivanov", "ivanovich", "ivan666", "test", "test", "test", null));
       app.contact().create(new ContactData().withName("test1"));
     }
   }
