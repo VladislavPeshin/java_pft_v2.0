@@ -12,7 +12,7 @@ public class ContactData {
   public final String group;
 
   public ContactData(String ivan, String name, String meddleName, String lastName, String nickname, String title, String address, String company, String group) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.meddleName = meddleName;
     this.lastName = lastName;
@@ -84,29 +84,12 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
-    if (id != that.id) return false;
-    if (name != null ? !name.equals(that.name) : that.name != null) return false;
-    if (meddleName != null ? !meddleName.equals(that.meddleName) : that.meddleName != null) return false;
-    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
-    if (title != null ? !title.equals(that.title) : that.title != null) return false;
-    if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (company != null ? !company.equals(that.company) : that.company != null) return false;
-    return group != null ? group.equals(that.group) : that.group == null;
+    return name != null ? name.equals(that.name) : that.name == null;
   }
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (name != null ? name.hashCode() : 0);
-    result = 31 * result + (meddleName != null ? meddleName.hashCode() : 0);
-    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
-    result = 31 * result + (title != null ? title.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (company != null ? company.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
-    return result;
+    return name != null ? name.hashCode() : 0;
   }
 
   @Override
