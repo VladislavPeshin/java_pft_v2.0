@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.tests.model;
 
-import java.util.Objects;
+
 
 public class GroupData {
   private int id = Integer.MAX_VALUE;

@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.tests.model.ContactData;
 import ru.stqa.pft.addressbook.tests.model.GroupData;
 import java.util.HashSet;
 import java.util.Set;
+import ru.stqa.pft.addressbook.tests.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,8 +109,8 @@ public class ContactHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.contact"));
     for (WebElement element : elements){
       String name = element.getText();
