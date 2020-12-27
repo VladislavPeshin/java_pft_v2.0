@@ -21,38 +21,24 @@ public class GroupHelper extends HelperBase{
   }
 
   public void returnToGroupPage() {
-    click(By.linkText("groups"));
-    click(By.linkText("Logout"));
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
+    click(By.linkText("group page"));
   }
 
-  public void submitGroupCreation(String submit) {
-    click(By.name(submit));
+  public void submitGroupCreation() {
+    click(By.name("submit"));
   }
 
-  public void fillGroupForm(GroupData groupData) {
-    initGroupCreation();
+  public void fillGroupFields(GroupData groupData) {
     type(By.name("group_name"), groupData.getName());
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-  }
-
-  public void fillGroupFormModification(GroupData groupData) {
-    type(By.name("group_name"), groupData.getName());
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+    type(By.name("group_header"), groupData.getHeader());
+    type(By.name("group_footer"), groupData.getFooter());
   }
 
   public void initGroupCreation() {
     click(By.name("new"));
   }
 
-  public void deleteSelectedGroups() {
+  public void deleteSelectedGroup() {
     click(By.xpath("(//input[@name='delete'])[2]"));
   }
 
@@ -65,23 +51,23 @@ public class GroupHelper extends HelperBase{
   }
 
   public void create(GroupData group) {
-    gotoGroupPage("groups");
-    fillGroupForm(group);
-    submitGroupCreation("submit");
+    initGroupCreation();
+    fillGroupFields(group);
+    submitGroupCreation();
     returnToGroupPage();
   }
 
   public void modify( GroupData group) {
     selectGroupById(group.getId());
     initGroupModification();
-    fillGroupFormModification(group);
+    fillGroupFields(group);
     submitGroupModification();
     returnToGroupPage();
   }
 
   public void delete(GroupData group) {
     selectGroupById(group.getId());
-    deleteSelectedGroups();
+    deleteSelectedGroup();
     returnToGroupPage();
   }
 
@@ -89,10 +75,7 @@ public class GroupHelper extends HelperBase{
     wd.findElement(By.cssSelector("input[value ='" + id + "']")).click();
   }
 
-  private void gotoGroupPage(String groups) {
-  }
-
-  public boolean isThereAGroup() {
+  public boolean isThereGroup() {
     return isElementPresent(By.name("selected[]"));
   }
 
@@ -103,10 +86,11 @@ public class GroupHelper extends HelperBase{
   public Groups all() {
     Groups groups = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    for (WebElement element : elements){
+    for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupData().withId(id).withName(name));
+      GroupData group = new GroupData().withId(id).withName(name);
+      groups.add(group);
     }
     return groups;
   }

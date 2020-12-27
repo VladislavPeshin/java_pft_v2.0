@@ -6,19 +6,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper extends HelperBase{
 
+
   public NavigationHelper(WebDriver wd) {
     super(wd);
   }
 
-  public void GroupPage() {
+  public void groupPage() {
     click(By.linkText("groups"));
   }
 
-  public void gotoContactPage() {
-    click(By.linkText("add new"));
-  }
-
-  public void gotoContactHome() {
+  public void contactHomePage() {
     click(By.linkText("home"));
   }
 }
