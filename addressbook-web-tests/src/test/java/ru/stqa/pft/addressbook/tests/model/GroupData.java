@@ -66,5 +66,4 @@ public class GroupData {
   public int hashCode() {
     return name != null ? name.hashCode() : 0;
   }
-
 }
