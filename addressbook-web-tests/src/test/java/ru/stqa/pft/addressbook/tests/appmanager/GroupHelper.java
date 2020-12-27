@@ -71,6 +71,14 @@ public class GroupHelper extends HelperBase{
     returnToGroupPage();
   }
 
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupFormModification(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
   private void gotoGroupPage(String groups) {
   }
 
