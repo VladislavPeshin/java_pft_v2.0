@@ -5,18 +5,17 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.tests.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation()  {
-    app.getNavigationHelper().gotoGroupPage("groups");
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("test6", "test2", "test3");
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.goTo().GroupPage("groups");
+    List<GroupData> before = app.group().List();
+    GroupData group = new GroupData().withName("test2");
+    app.group().create(group);
+    List<GroupData> after = app.group().List();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     //Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());

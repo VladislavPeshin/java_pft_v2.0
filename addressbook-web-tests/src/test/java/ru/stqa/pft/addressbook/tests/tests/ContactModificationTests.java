@@ -6,27 +6,29 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.tests.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.getNavigationHelper().gotoContactPage();
-    app.getNavigationHelper().gotoContactHome();
-    if (! app.getContactHelper().isThereContact()){
-      app.getContactHelper().createContact(new ContactData("ivan", "ivan", "ivanov", "ivanovich", "ivan666", "test", "test", "test", null));
+    app.goTo().gotoContactPage();
+    app.goTo().gotoContactHome();
+    if (app.contact().list().size() == 0){
+      //app.contact().create(new ContactData("ivan", "ivan", "ivanov", "ivanovich", "ivan666", "test", "test", "test", null));
+      app.contact().create(new ContactData().withName("test1"));
     }
   }
 
   @Test
   public void testContactModification() throws Exception{
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(),"ivan", "ivan", "ivanov", "ivanovich", "ivan666", "test", "test", "test", null);
-    app.getContactHelper().modifyContact(index, contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withName("ivan").withMeddleName("ivanov").withLastName("ivanovich")
+            .withNickname("ivan666").withTitle("test").withAddress("test").withCompany("test").withGroup(null);
+    app.contact().modify(index, contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
 
     before.remove(index);
