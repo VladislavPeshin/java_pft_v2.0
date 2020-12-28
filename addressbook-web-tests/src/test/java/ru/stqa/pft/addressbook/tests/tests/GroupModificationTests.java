@@ -22,10 +22,10 @@ public class GroupModificationTests extends TestBase{
   }
 
   @Test
-  public void testGroupModification() {
+  public void testModificationGroup() throws Exception {
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
-    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("Test").withHeader("Test").withFooter("Test");
     app.group().modify(group);
     Groups after = app.group().all();
     assertEquals(after.size(), before.size());

@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 public class ContactModificationTests extends TestBase{
 
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     app.goTo().contactHomePage();
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData().
@@ -21,7 +21,7 @@ public class ContactModificationTests extends TestBase{
   }
 
   @Test
-  public void testContactModification() throws Exception{
+  public void testModificationContact() throws Exception {
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId())

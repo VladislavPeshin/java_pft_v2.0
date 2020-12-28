@@ -38,33 +38,15 @@ public class ContactCreationTests extends TestBase {
     return contacts.stream().map((g)->new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test (dataProvider = "validContactsFromJson")
+  @Test(dataProvider = "validContactsFromJson")
   public void testCreateContact(ContactData contact) throws Exception {
     app.goTo().contactHomePage();
     Contacts before = app.contact().all();
-    File photo = new File("src/test/resources/stru.png");
-    /*
-    ContactData contact = new ContactData().
-            withName("Ivan").withSurname("Ivanov").withMobilePhone("666666").withEmail("test666@test.ru").withPhoto(photo);
-
-     */
     app.contact().create(contact);
     Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size()+1));
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
   }
-
-/*
-  @Test
-  public void testCurrentDir(){
-    File currentDir = new File(".");
-    System.out.println(currentDir.getAbsolutePath());
-    File photo = new File("src/test/resources/stru.png");
-    System.out.println(photo.getAbsolutePath());
-    System.out.println(photo.exists());
-  }
-
- */
 
 }

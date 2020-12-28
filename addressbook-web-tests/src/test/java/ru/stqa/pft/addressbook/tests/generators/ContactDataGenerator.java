@@ -18,17 +18,16 @@ public class ContactDataGenerator {
   public static void main(String[] args) throws IOException {
     int count = Integer.parseInt(args[0]);
     File file = new File(args[1]);
-
     List<ContactData> contacts = generateContacts(count);
     saveAsJson(contacts, file);
   }
 
   private static void saveAsJson(List<ContactData> contacts, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String json = gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private static List<ContactData> generateContacts(int count) {
