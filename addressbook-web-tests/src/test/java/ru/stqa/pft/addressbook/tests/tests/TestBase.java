@@ -4,9 +4,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
 import ru.stqa.pft.addressbook.tests.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.tests.model.ContactData;
+import ru.stqa.pft.addressbook.tests.model.Contacts;
+import ru.stqa.pft.addressbook.tests.model.GroupData;
+import ru.stqa.pft.addressbook.tests.model.Groups;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
 
@@ -28,6 +36,27 @@ public class TestBase {
   @AfterSuite(alwaysRun = true)
   public void tearDown() throws Exception {
     app.stop();
+  }
+
+  public void verifyGroupListInUi() {
+    if (Boolean.getBoolean("verifyUi")) {
+      Groups dbGroups = app.db().groups();
+      Groups uiGroups = app.group().all();
+      assertThat(uiGroups, equalTo(dbGroups.stream()
+              .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+              .collect(Collectors.toSet())));
+
+    }
+  }
+
+  public void verifyContactListInUi() {
+    if (Boolean.getBoolean("verifyUi")) {
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().all();
+      assertThat(uiContacts, equalTo(dbContacts.stream()
+              .map((c) -> new ContactData().withId(c.getId()).withName(c.getName()).withSurname(c.getSurname()))
+              .collect(Collectors.toSet())));
+    }
   }
 
 }

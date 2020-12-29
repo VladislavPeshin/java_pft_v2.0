@@ -21,11 +21,16 @@ public class ContactHelper extends HelperBase{
     super(wd);
   }
 
-  public void fillContactFields(ContactData contactData) {
+  public void fillContactFields(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getName());
     type(By.name("lastname"), contactData.getSurname());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
+    type(By.name("home"), contactData.getHomePhone());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
   }
 
 
@@ -60,14 +65,14 @@ public class ContactHelper extends HelperBase{
 
   public void create(ContactData contact) {
     initNewContactPage();
-    fillContactFields(contact);
+    fillContactFields(contact,true);
     submitNewContactCreation();
     returnToHomePage();
   }
 
   public void modify(ContactData contact) {
     initContactModificationById(contact.getId());
-    fillContactFields(contact);
+    fillContactFields(contact, false);
     submitContactModification();
     returnToHome();
   }
@@ -77,6 +82,19 @@ public class ContactHelper extends HelperBase{
     initContactDelete();
     allertWindow();
     returnToHome();
+  }
+  public void addToSelectedGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectGroupById(group.getId());
+    addtoGroup();
+  }
+
+  private void addtoGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+  private void selectGroupById(int id) {
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
   }
 
   private void selectContactById(int id) {

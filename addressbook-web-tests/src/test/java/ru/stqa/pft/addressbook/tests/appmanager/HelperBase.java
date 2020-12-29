@@ -18,10 +18,14 @@ public class HelperBase {
 
   protected void type(By locator, String name) {
     click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(name);
+    if (name != null) {
+      String existingText = wd.findElement(locator).getAttribute("value");
+      if (!name.equals(existingText)) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(name);
+      }
+    }
   }
-
 
   public boolean isElementPresent(By by) {
     try {
@@ -30,5 +34,6 @@ public class HelperBase {
     } catch (NoSuchElementException e) {
       return false;
     }
+
   }
 }

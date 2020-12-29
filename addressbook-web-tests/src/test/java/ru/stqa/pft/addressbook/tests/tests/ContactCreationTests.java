@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.tests.tests;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.tests.model.ContactData;
 import ru.stqa.pft.addressbook.tests.model.Contacts;
+import ru.stqa.pft.addressbook.tests.model.Groups;
+//import ru.stqa.pft.addressbook.appmanager.ContactHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+//import static ru.stqa.pft.addressbook.appmanager.ContactHelper.*;
+
 
 
 
@@ -45,8 +49,9 @@ public class ContactCreationTests extends TestBase {
     app.contact().create(contact);
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size()+1));
-
-    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream()
+            .mapToInt(g -> g.getId()).max().getAsInt()))));
+    verifyContactListInUi();
   }
 
 }
