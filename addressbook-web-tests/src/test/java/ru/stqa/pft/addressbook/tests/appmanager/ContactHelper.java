@@ -143,4 +143,17 @@ public class ContactHelper extends HelperBase{
             withEmail(email).withEmail2(email2).withEmail3(email3);
 
   }
+
+  public void removeFromSelectedGroup(ContactData contact, GroupData group) {
+    selectDeletedGroupById(group.getId());
+    selectContactById(contact.getId());
+    removeFromGroup();
+  }
+
+  private void removeFromGroup() {
+    wd.findElement(By.name("remove")).click();
+  }
+  private void selectDeletedGroupById(int id) {
+    new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
+  }
 }
