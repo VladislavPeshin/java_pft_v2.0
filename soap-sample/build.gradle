@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    /*
+    implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.beust:jcommander:1.78'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.15'
+    implementation 'mysql:mysql-connector-java:8.0.22'
+    implementation("org.hibernate:hibernate-core:5.4.20.Final")
+     */
+}
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.12'
+    }
+}
+
+apply plugin: 'no.nils.wsdl2java'
+
+wsdl2java {
+    wsdlDir = file("src/main/resources/") // define to support incremental build
+    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
+                          ["$projectDir/src/main/resources/ipservice.wsdl"]
+    ]
+}
